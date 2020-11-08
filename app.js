@@ -13,17 +13,7 @@ const server = app.listen(PORT, function () {
 app.use(express.static("public"));
 
 // Socket setup
-const io = socket(server,{
-handlePreflightRequest: function (req, res) {
-var headers = {
-'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-'Access-Control-Allow-Origin': req.headers.origin ,
-'Access-Control-Allow-Credentials': true
-};
-res.writeHead(200, headers);
-res.end();
-}
-});
+const io = socket(server);
 
 const activeUsers = new Set();
 
