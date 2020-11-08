@@ -14,6 +14,7 @@ app.use(express.static("public"));
 
 // Socket setup
 const io = socket(server);
+io.origins('*:*') ;
 
 const activeUsers = new Set();
 
