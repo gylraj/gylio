@@ -29,14 +29,14 @@ const activeUsers = new Set();
 const messageList = {};
 messageList["test"] = []
 
-  console.log(io);
+  // console.log(io);
 io.on("connection", function (socket) {
-  console.log(socket);
+  // console.log(socket);
   console.log("Made socket connection");
 
   socket.on('connect', () => {
     console.log("socket")
-    console.log(socket)
+    // console.log(socket)
     console.log(socket.connected); // true
     io.emit("new user", [...activeUsers]);
   });
