@@ -8,7 +8,7 @@
   },
   "main": "app.js",
   "scripts": {
-    "start": "node app.js" 
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/gylraj/gylio#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "socket.io": "^3.0.0"
+    "socket.io": "^3.0.0",
+    "sockjs": "^0.3.21"
   }
 }

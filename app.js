@@ -2,7 +2,7 @@ const express = require("express");
 const socket = require("socket.io");
 
 // App setup
-const PORT = process.env.PORT;// | 5555;
+const PORT = process.env.PORT | 5555;
 const app = express();
 const server = app.listen(PORT, function () {
   console.log(`Listening on port ${PORT}`);
@@ -11,7 +11,6 @@ const server = app.listen(PORT, function () {
 
 // Static files
 app.use(express.static("public"));
-
 
 var options = {
         allowUpgrades: true,
@@ -27,10 +26,25 @@ const io = socket(server,options);
 
 const activeUsers = new Set();
 
+const messageList = {};
+messageList["test"] = []
+
+  console.log(io);
 io.on("connection", function (socket) {
+  console.log(socket);
   console.log("Made socket connection");
 
+  socket.on('connect', () => {
+    console.log("socket")
+    console.log(socket)
+    console.log(socket.connected); // true
+    io.emit("new user", [...activeUsers]);
+    io.to(socket.id).emit('event', 'I just met you');
+  });
+
   socket.on("new user", function (data) {
+    console.log("new user");
+    console.log(data);
     socket.userId = data;
     activeUsers.add(data);
     io.emit("new user", [...activeUsers]);
@@ -42,6 +56,8 @@ io.on("connection", function (socket) {
   });
 
   socket.on("chat message", function (data) {
+    console.log("chat message");
+    console.log(data);
     io.emit("chat message", data);
   });
   
