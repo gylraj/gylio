@@ -2,7 +2,7 @@ const express = require("express");
 const socket = require("socket.io");
 
 // App setup
-const PORT = process.env.PORT | 5555;
+const PORT = process.env.PORT;// | 5555;
 const app = express();
 const server = app.listen(PORT, function () {
   console.log(`Listening on port ${PORT}`);
@@ -39,7 +39,6 @@ io.on("connection", function (socket) {
     console.log(socket)
     console.log(socket.connected); // true
     io.emit("new user", [...activeUsers]);
-    io.to(socket.id).emit('event', 'I just met you');
   });
 
   socket.on("new user", function (data) {
@@ -48,6 +47,7 @@ io.on("connection", function (socket) {
     socket.userId = data;
     activeUsers.add(data);
     io.emit("new user", [...activeUsers]);
+    io.to(socket.id).emit('event', 'I just met you');
   });
 
   socket.on("disconnect", () => {
