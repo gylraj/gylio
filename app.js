@@ -3,14 +3,14 @@ const socket = require("socket.io");
 
 
 // App setup
-const PORT = process.env.PORT | 5555;
+const PORT = process.env.PORT;// | 5555;
 const app = express();
 const server = app.listen(PORT, function () {
   consoleThis(`Listening on port ${PORT}`);
   consoleThis(`http://localhost:${PORT}`);
 });
 
-const DEBUG = true; 
+const DEBUG = false; 
 
 // Static files
 app.use(express.static("public"));
